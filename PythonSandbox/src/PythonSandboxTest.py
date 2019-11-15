@@ -7,4 +7,4 @@ def QuestionMarks(s):
     
     return "return";
 
-print(QuestionMarks())
+print(QuestionMarks("arrb6???4xxbl5???eee5"))
