@@ -1,0 +1,17 @@
+Neural Network Information:
+	Summary:
+		A network that determines the strength of any given hand
+		
+	First Level:
+		Node 1: Player's Card 1
+		Node 2: Player's Card 2
+		Node 3: High Card
+		Node 4-8: Ranks of Cards on board 
+		Node 9: HandStengthNum
+	
+	Second Level:
+		Node 1: Hand
+			Inputs: Nodes 1 and 2
+		Node 2: High Card Measure
+			Inputs: 
+		
