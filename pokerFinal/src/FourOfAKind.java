@@ -6,8 +6,8 @@ public class FourOfAKind extends HandStrength {
 
 	public FourOfAKind(Player player, Table table) {
 		super(handStrengthName, 2, 7, player, table);
-		ArrayList<String> suits = HandInfo.getSuits();
-		ArrayList<String> ranks = HandInfo.getRanks();
+		ArrayList<Integer> suits = HandInfo.getSuits();
+		ArrayList<Integer> ranks = HandInfo.getRanks();
 		ArrayList<ArrayList<Card>> insideWorkingHands = new ArrayList<>();
 		ArrayList<Card> perRank = new ArrayList<>();
 		for (int rank = 0; rank < ranks.size(); rank++) {

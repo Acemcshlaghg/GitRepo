@@ -1,76 +1,56 @@
 
-// Project: pokerFinal
+// Project: CheckerboardNN
 // Written by: Daniel Rosen
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.ImageFilter;
-
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+import java.lang.Math;
 import javax.swing.JPanel;
 
-public class GraphicsPanel extends JPanel implements MouseListener {
+public class GraphicsPanel extends JPanel implements KeyListener {
+	private static Scanner s = new Scanner(System.in);
+	private final int SQUARE_HEIGHT = 300; // The width of one space on the board. Constant used for drawing board.
+	private final int SQUARE_LENGTH = 700;
 
-	private final int SQUARE_WIDTH = 200; // The width of one space on the board. Constant used for drawing board.
-	private Graphics2D g2;
-	
+	Font f = new Font("serif", Font.PLAIN, 20);
+
 	public GraphicsPanel() {
-		setPreferredSize(new Dimension(SQUARE_WIDTH, SQUARE_WIDTH)); 
+		setPreferredSize(new Dimension(SQUARE_LENGTH, SQUARE_HEIGHT));
 		this.setFocusable(true); // for keylistener
-		this.addMouseListener(this);
+		this.addKeyListener(this);
 
 	}
 
-	// method: paintComponent
-	// description: This method will paint the items onto the graphics panel. This
-	// method is called when the panel is
-	// first rendered. This method also highlights the pieces that the players slect
-	// to move in a given turn, and
-	// and checks if the game is over by checking for the death of one king and the
-	// life of the other,
-	// parameters: Graphics g - This object is used to draw your images onto the
-	// graphics panel.
 	public void paintComponent(Graphics g) {
-		}
-
-	@Override
-	// method: mouseClicked
-	// description: This method is activated when the user clicks anywhere won the
-	// board. If the game is not over,
-	// the logic checks whose turn it is, and highlights the piece the user clicked
-	// on yellow (for white)
-	// or blue (for black). When the user clicks the place they wish for their piece
-	// to go, this method checks whether it
-	// is a valid move, and if the move is valid, the piece is moved. If not, the
-	// user can try again.
-	public void mouseClicked(MouseEvent e) {
 		
-	}// end of mouse-clicked
+	}// end of paintComponent
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void keyPressed(KeyEvent key) {
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
+	
 }

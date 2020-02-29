@@ -13,41 +13,29 @@ public class HandInfo {
 	private static ArrayList<Card> usedCards = new ArrayList<>();
 
 	public static Card dealCard() {
-		int suit = ((int) (Math.random() * cardsLeft)) + 1;
-		int rank = ((int) (Math.random() * cardsLeft)) + 1;
-		Card c = new Card(intToSuit(suit), intToRank(rank));
+		int suit = ((int) (Math.random() * suits.length));
+		int rank = ((int) (Math.random() * ranks.length));
+		Card c = new Card(suit, rank);
 		if (usedCards.size() > 0) {
 			for (Card used : usedCards) {
-				if (c.getRank().equals(used.getSuit()) && c.getRank().equals(used.getSuit())) {
+				if (c.getRank() == used.getRank() && c.getSuit() == used.getSuit()) {
 					return dealCard();
 				}
 			}
 		}
 		cardsLeft--;
+		rankChances[rank]--;
+		suitChances[suit]--;
 		usedCards.add(c);
 		return c;
 	}
 
-	public static String intToSuit(int s) {
-		int whichSuit = suitChances[0];
-		int suitIterator = 0;
-		while (whichSuit < s) {
-			suitIterator++;
-			whichSuit += suitChances[suitIterator];
-		}
-		suitChances[suitIterator]--;
-		return suits[suitIterator];
+	public static String intToSuit(int suit) {
+		return suits[suit];
 	}
 
-	public static String intToRank(int s) {
-		int whichRank = rankChances[0];
-		int rankIterator = 0;
-		while (whichRank < s) {
-			rankIterator++;
-			whichRank += rankChances[rankIterator];
-		}
-		rankChances[rankIterator]--;
-		return ranks[rankIterator];
+	public static String intToRank(int rank) {
+		return ranks[rank];
 	}
 
 	public static int rankToInt(String rank) {
@@ -56,11 +44,20 @@ public class HandInfo {
 				return i;
 			}
 		}
+		return -1;
+	}
+
+	public static int suitToInt(String suit) {
+		for (int i = suits.length - 1; i >= 0; i--) {
+			if (suit.equals(suits[i])) {
+				return i;
+			}
+		}
 		return 0;
 	}
 
 	public static String printHand(Player p) {
-		return p.getHand()[0].toString() + p.getHand()[1].toString();
+		return p.getHand()[0].toString() + "" + p.getHand()[1].toString();
 	}
 
 	public static String handStrength(Player p, Table t) {
@@ -77,28 +74,28 @@ public class HandInfo {
 		} else if (checkStraight(p, t) && checkFlush(p, t)) {
 			p.setHandStrength(handStrengths[1]);
 		}
-		String handRank = highRank(p, t);
+		int handRank = highRank(p, t);
 		if (p.getHandStrengthNum() != 20) {
-			handRank = ranks[p.getHandStrengthNum()];
+			handRank = p.getHandStrengthNum();
 		}
 		switch (p.getHandStrength()) {
 		case "Royal Flush":
 			return p.getHandStrength();
 		case "Four of a Kind":
-			return "Four " + handRank + "s";
+			return "Four " + ranks[handRank] + "s";
 		case "Straight Flush":
 		case "Flush":
 		case "Straight":
-			return handRank + " high " + p.getHandStrength();
+			return ranks[handRank] + " high " + p.getHandStrength();
 		case "Full House":
-			return p.getHandStrength() + " of " + handRank + "s";
+			return p.getHandStrength() + " of " + ranks[handRank] + "s";
 		case "Three of a Kind":
-			return "Three " + handRank + "s";
+			return "Three " + ranks[handRank] + "s";
 		case "Two Pair":
 		case "Pair":
 			return p.getHandStrength() + " of " + ranks[p.getHandStrengthNum()] + "s";
 		default:
-			return handRank + " High Card";
+			return ranks[handRank] + " High Card";
 		}
 	}
 
@@ -126,12 +123,12 @@ public class HandInfo {
 		allCards.addAll(t.getBoard());
 		for (int firstCard = 0; firstCard < allCards.size() - 1; firstCard++) {
 			for (int secondCard = firstCard + 1; secondCard < allCards.size(); secondCard++) {
-				if (allCards.get(firstCard).getRank().equals(allCards.get(secondCard).getRank())) {// "if there is a
+				if (allCards.get(firstCard).getRank() == allCards.get(secondCard).getRank()) {// "if there is a
 					Card[] pair = { allCards.get(firstCard), allCards.get(secondCard) };
 					pairs.add(pair); // pair"
 					for (int thirdCard = secondCard + 1; thirdCard < allCards.size(); thirdCard++) {
-						if (allCards.get(firstCard).getRank()
-								.equals(allCards.get(thirdCard).getRank())) {/* "if there are three of a kind" */
+						if (allCards.get(firstCard).getRank() == allCards.get(thirdCard)
+								.getRank()) {/* "if there are three of a kind" */
 							Card[] threeKind = { allCards.get(firstCard), allCards.get(secondCard),
 									allCards.get(thirdCard) };
 							removeRepeats(pairs, allCards.get(thirdCard).getRank());
@@ -141,7 +138,7 @@ public class HandInfo {
 							}
 							for (int fourthCard = thirdCard + 1; fourthCard < allCards
 									.size(); fourthCard++) {/* "if there are four of a kind" */
-								if (allCards.get(firstCard).getRank().equals(allCards.get(fourthCard).getRank())) {
+								if (allCards.get(firstCard).getRank() == allCards.get(fourthCard).getRank()) {
 									Card[] fourKind = { allCards.get(firstCard), allCards.get(secondCard),
 											allCards.get(thirdCard), allCards.get(fourthCard) };
 									removeRepeats(pairs, allCards.get(thirdCard).getRank());
@@ -160,7 +157,7 @@ public class HandInfo {
 
 	public static boolean checkFourOfaKind(Player p, ArrayList<Card[]> dups) {
 		if (dups.size() > 0 && dups.get(0).length == 4) {
-			p.setHandStrengthNum(rankToInt(dups.get(0)[0].getRank()));
+			p.setHandStrengthNum(dups.get(0)[0].getRank());
 			p.setHandStrength("Four of a Kind");
 			return true;
 		}
@@ -173,7 +170,7 @@ public class HandInfo {
 		}
 		if (pairs.get(0).length == 3 && pairs.size() > 1) {
 			p.setHandStrength("Full House");
-			p.setHandStrengthNum(rankToInt(pairs.get(0)[0].getRank()));
+			p.setHandStrengthNum(pairs.get(0)[0].getRank());
 			return true;
 		} else {
 			return false;
@@ -182,21 +179,21 @@ public class HandInfo {
 
 	public static boolean checkFlush(Player p, Table t) {
 		int numSuit = 0;
-		Card highCard = new Card("hearts", "0");
-		for (String suit : suits) {// iterates through list of suits
+		Card highCard = new Card(1, 0);
+		for (int suit = 0; suit < suits.length; suit++) {// iterates through list of suits
 			for (Card c : t.getBoard()) {// finds number of cards per each suit on the board
-				if (c.getSuit().equals(suit)) {
+				if (c.getSuit() == suit) {
 					numSuit++;
-					if (highCard.getRank().equals("0") || highCard.passedHasHigherRank(c, ranks)) {
+					if (highCard.getRank() == 0 || highCard.passedHasHigherRank(c, ranks)) {
 						highCard.setRank(c.getRank());
 						highCard.setSuit(suit);
 					}
 				}
 			}
 			for (Card c : p.getHand()) {// iterates through player's hand
-				if (c.getSuit().equals(suit)) {
+				if (c.getSuit() == suit) {
 					numSuit++;
-					if (highCard.getRank().equals("0") || highCard.passedHasHigherRank(c, ranks)) {
+					if (highCard.getRank() == 0 || highCard.passedHasHigherRank(c, ranks)) {
 						highCard.setRank(c.getRank());
 						highCard.setSuit(suit);
 					}
@@ -204,12 +201,11 @@ public class HandInfo {
 			}
 			if (numSuit >= 5) {
 				p.setHandStrength("Flush");
-				int rankInt = ranks.length - 1;
-				while (!(highCard.getRank().equals(ranks[rankInt]))) {
-					System.out.println(rankInt);
-					rankInt--;
+				int rank = ranks.length - 1;
+				while (!(highCard.getRank() == rank)) {
+					rank--;
 				}
-				p.setHandStrengthNum(rankInt);
+				p.setHandStrengthNum(rank);
 				return true;
 			}
 			numSuit = 0;
@@ -219,9 +215,9 @@ public class HandInfo {
 
 	public static boolean checkStraight(Player p, Table t) {
 		int consecCount = 0;
-		for (int leadCard = ranks.length - 1; leadCard >= 0; leadCard--) { // check for straight
-			if (t.isInBoard(ranks[leadCard]) || p.getHand()[0].getRank().equals(ranks[leadCard])
-					|| p.getHand()[1].getRank().equals(ranks[leadCard])) {
+		for (int leadCardRank = ranks.length - 1; leadCardRank >= 0; leadCardRank--) { // check for straight
+			if (t.isInBoard(leadCardRank) || (p.getHand()[0].getRank() == leadCardRank)
+					|| p.getHand()[1].getRank() == leadCardRank) {
 				consecCount++;
 			} else {
 				consecCount = 0;
@@ -229,12 +225,12 @@ public class HandInfo {
 			}
 			if (consecCount == 5) {// five ordered cards
 				p.setHandStrength("Straight");
-				p.setHandStrengthNum(leadCard + 4);
+				p.setHandStrengthNum(leadCardRank + 4);
 				return true;
 			}
 		} // end of for loop
-		if ((consecCount == 4) && (t.isInBoard("Ace") || p.getHand()[0].getRank().equals("Ace")
-				|| p.getHand()[1].getRank().equals("Ace"))) {
+		if ((consecCount == 4)
+				&& (t.isInBoard(13) || p.getHand()[0].getRank() == 13 || p.getHand()[1].getRank() == 13)) {
 			p.setHandStrength("Straight");
 			p.setHandStrengthNum(4);
 			return true;
@@ -247,7 +243,7 @@ public class HandInfo {
 
 		if (dups.size() != 0 && dups.get(0).length == 3) {
 			p.setHandStrength("Three of a Kind");
-			p.setHandStrengthNum(rankToInt(dups.get(0)[0].getRank()));
+			p.setHandStrengthNum(dups.get(0)[0].getRank());
 			return true;
 		}
 		return false;
@@ -257,22 +253,22 @@ public class HandInfo {
 
 		if (duplicates(p, t).size() > 1 && duplicates(p, t).get(0).length == 2) {
 			p.setHandStrength("Two Pair");
-			p.setHandStrengthNum(rankToInt(duplicates(p, t).get(0)[0].getRank()));
+			p.setHandStrengthNum(duplicates(p, t).get(0)[0].getRank());
 			return true;
 		} else if (duplicates(p, t).size() == 1 && duplicates(p, t).get(0).length == 2) {
 			p.setHandStrength("Pair");
-			p.setHandStrengthNum(rankToInt(duplicates(p, t).get(duplicates(p, t).size() - 1)[0].getRank()));
+			p.setHandStrengthNum(duplicates(p, t).get(duplicates(p, t).size() - 1)[0].getRank());
 			return true;
 		}
 		return false;
 	}
 
 	public static ArrayList<Card[]> simplifyDups(Player p, ArrayList<Card[]> dups) {
-		String highDupRank;
+		int highDupRank;
 		if (dups.size() > 0 && dups.get(0).length > 2) {
 			highDupRank = dups.get(0)[0].getRank();
 			for (int i = dups.size() - 1; i > 0; i--) {
-				if (dups.get(i)[0].getRank().equals(highDupRank)) {
+				if (dups.get(i)[0].getRank() == highDupRank) {
 					dups.remove(i);
 				}
 			}
@@ -280,7 +276,7 @@ public class HandInfo {
 		return dups;
 	}
 
-	public static String highRank(Player p, Table t) {
+	public static int highRank(Player p, Table t) {
 		Card highestCard = new Card();
 		highestCard.setRank(t.getBoard().get(0).getRank());
 		for (Card card : t.getBoard()) {
@@ -324,7 +320,7 @@ public class HandInfo {
 		}
 		return ss;
 	}
-	
+
 	public static ArrayList<Card> getUsedCards() {
 		return usedCards;
 	}
@@ -334,21 +330,19 @@ public class HandInfo {
 		HandInfo.ante = ante;
 	}
 
-	public static void removeRepeats(ArrayList<Card[]> pairs, String rank) {
+	public static void removeRepeats(ArrayList<Card[]> pairs, int rank) {
 		for (int i = pairs.size() - 1; i >= 0; i--) {
-			if (rank.equals(pairs.get(i)[0].getRank())) {
+			if (rank == pairs.get(i)[0].getRank()) {
 				pairs.remove(i);
 			}
 		}
 	}
 
-
-
 	public static ArrayList<Card> fullDeck() {
 		ArrayList<Card> fullDeck = new ArrayList<>();
 		for (int suit = 0; suit < suits.length; suit++) {
 			for (int rank = 0; rank < ranks.length; rank++) {
-				fullDeck.add(new Card(suits[suit], ranks[rank]));
+				fullDeck.add(new Card(suit, rank));
 			} // end of rank loop
 		} // end of suit loop
 		return fullDeck;

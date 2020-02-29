@@ -5,8 +5,8 @@ public class RoyalFlush extends HandStrength {
 
 	public RoyalFlush(Player player, Table table) {
 		super(handStrengthName, 3, 9, player, table);
-		ArrayList<String> suits = HandInfo.getSuits();
-		ArrayList<String> ranks = HandInfo.getRanks();
+		ArrayList<Integer> suits = HandInfo.getSuits();
+		ArrayList<Integer> ranks = HandInfo.getRanks();
 		ArrayList<ArrayList<Card>> insideWorkingHands = new ArrayList<>();
 		for (int suit = 0; suit < suits.size(); suit++) {
 			ArrayList<Card> current = new ArrayList<>();

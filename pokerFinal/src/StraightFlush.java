@@ -8,8 +8,8 @@ public class StraightFlush extends HandStrength {
 
 	public StraightFlush(Player player, Table table) {
 		super(handStrengthName, 3, 8, player, table);
-		ArrayList<String> suits = HandInfo.getSuits();
-		ArrayList<String> ranks = HandInfo.getRanks();
+		ArrayList<Integer> suits = HandInfo.getSuits();
+		ArrayList<Integer> ranks = HandInfo.getRanks();
 		for (int suit = 0; suit < suits.size(); suit++) {
 			ArrayList<ArrayList<Card>> sameSuit = new ArrayList<>();
 			for (int startingRank = 0; startingRank <= 7; startingRank++) {

@@ -1,42 +1,42 @@
 
 public class Card {
 	// instance variables
-	private String suit;
-	private String rank;
+	private int suit;
+	private int rank;
 
 	// constructors
 	public Card() {
-		this("hearts", "2");
+		this(1, 1);
 	}
 
-	public Card(String suit, String rank) {
+	public Card(int suit, int rank) {
 		this.suit = suit;
 		this.rank = rank;
 	}
 
 	// accessors(getters)
-	public String getSuit() {
+	public int getSuit() {
 		return suit;
 
 	}
 
-	public String getRank() {
+	public int getRank() {
 		return rank;
 	}
 
 	// modifiers(setters)
-	public void setSuit(String suit) {
+	public void setSuit(int suit) {
 		this.suit = suit;
 	}
 
-	public void setRank(String rank) {
+	public void setRank(int rank) {
 		this.rank = rank;
 	}
 
 	// methods
 	public String toString() {
 		char suitSymbol;
-		return "|" + rank + " " + suit + "|";
+		return "|" + HandInfo.intToRank(rank) + " " + HandInfo.intToSuit(suit) + "|";
 	}
 
 	public boolean passedHasHigherRank(Card c, String[] ranks) {// returns true if the card passed has higher rank

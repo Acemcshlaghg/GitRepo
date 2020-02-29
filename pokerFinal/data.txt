@@ -1,1 +1,80 @@
-1581875031494 Stuffnewnew
+hand @1582030544573
+P1 Hand: |Queen hearts||6 spades|
+CPU Hand: |7 diamonds||Jack hearts|
+Board: [|7 clubs|, |4 hearts|, |6 clubs|, |5 spades|, |King diamonds|]
+
+hand @1582030585754
+P1 Hand: |7 diamonds||Jack spades|
+CPU Hand: |7 hearts||Ace diamonds|
+Board: [|4 diamonds|, |3 hearts|, |4 spades|, |4 clubs|, |2 spades|]
+
+hand @1582030813741
+P1 Hand: |Jack spades||Jack hearts|
+CPU Hand: |8 spades||4 hearts|
+Board: [|3 spades|, |7 spades|, |Queen hearts|, |5 clubs|, |King hearts|]
+
+hand @1582030878939
+P1 Hand: |10 diamonds||6 hearts|
+CPU Hand: |3 diamonds||4 hearts|
+Board: [|2 hearts|, |2 diamonds|, |4 diamonds|, |Ace clubs|, |Ace spades|]
+
+hand @1582030908153
+P1 Hand: |3 spades||5 spades|
+CPU Hand: |Queen clubs||Jack spades|
+Board: [|2 hearts|, |5 hearts|, |6 clubs|, |9 clubs|, |10 spades|]
+
+hand @1582031648631
+P1 Hand: |Jack clubs||Jack hearts|
+CPU Hand: |10 spades||7 spades|
+Board: [|Ace clubs|, |8 diamonds|, |9 diamonds|, |King hearts|, |Queen hearts|]
+
+hand @1582031663845
+P1 Hand: |9 spades||8 spades|
+CPU Hand: |Jack diamonds||9 clubs|
+Board: [|5 hearts|, |5 clubs|, |10 diamonds|, |10 clubs|, |Jack spades|]
+
+hand @1582245205549
+P1 Hand: |7 diamonds||6 clubs|
+CPU Hand: |Ace diamonds||10 clubs|
+Board: [|4 hearts|, |4 diamonds|, |9 spades|, |Jack hearts|, |Queen hearts|]
+
+hand @1582245919929
+P1 Hand: |3 clubs||10 spades|
+CPU Hand: |Queen spades||9 hearts|
+Board: [|Jack hearts|, |7 hearts|, |Queen hearts|, |4 hearts|, |9 clubs|]
+
+hand @1582933867927
+P1 Hand: |5 clubs||10 clubs|
+CPU Hand: |2 diamonds||7 clubs|
+Board: [|Ace spades|, |6 clubs|, |King spades|, |7 hearts|, |7 diamonds|]
+
+hand @1582934199246
+P1 Hand: |King diamonds||3 diamonds|
+CPU Hand: |8 hearts||Queen spades|
+Board: [|6 hearts|, |9 hearts|, |Jack clubs|, |2 clubs|, |Queen diamonds|]
+
+hand @1582934210073
+P1 Hand: |10 diamonds||King hearts|
+CPU Hand: |Queen spades||8 spades|
+Board: [|5 diamonds|, |2 clubs|, |Jack clubs|, |4 clubs|, |2 hearts|]
+
+hand @1582934235772
+P1 Hand: |Jack diamonds||9 hearts|
+CPU Hand: |5 diamonds||Queen clubs|
+Board: [|Ace spades|, |8 spades|, |10 spades|, |3 clubs|, |3 hearts|]
+
+hand @1582934244040
+P1 Hand: |9 clubs||7 spades|
+CPU Hand: |8 diamonds||7 clubs|
+Board: [|2 hearts|, |Ace clubs|, |10 diamonds|, |7 hearts|, |4 diamonds|]
+
+hand @1582934323380
+P1 Hand: |Queen clubs||9 diamonds|
+CPU Hand: |4 diamonds||8 diamonds|
+Board: [|9 clubs|, |7 hearts|, |Queen hearts|, |3 clubs|, |Jack clubs|]
+
+hand @1582934455498
+P1 Hand: |Ace clubs||Ace diamonds|
+CPU Hand: |7 spades||6 hearts|
+Board: [|5 spades|, |7 clubs|, |Jack diamonds|, |3 spades|, |8 clubs|]
+

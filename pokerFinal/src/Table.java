@@ -36,9 +36,9 @@ public class Table {
 	}
 
 	// methods
-	public boolean isInBoard(String rank) {
+	public boolean isInBoard(int rank) {
 		for (Card c : board) {
-			if (c.getRank().equals(rank)) {
+			if (c.getRank() == rank) {
 				return true;
 			}
 		} // end of loop
